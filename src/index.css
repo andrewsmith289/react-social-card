@@ -1,12 +1,20 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  /* padding: 1em; */
 }
 
-* {
-  padding: 1em;
+.header-brief {
+  border: 1px solid black;
+}
+
+.header-brief .main-content {
+  display: inline-block;
+}
+
+.article-date::before {
+  content: '\25CF';
+  display: inline-block;
+}
+
+.social-actions > div {
+  display: inline-block;
 }

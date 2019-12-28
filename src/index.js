@@ -2,6 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+  faEnvelope,
+  faComment,
+  faHeart,
+  faRetweet,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+library.add(faEnvelope, faComment, faHeart, faRetweet);
+
 class SocialCard extends React.Component {
   constructor(props) {
     super(props);
@@ -41,17 +52,36 @@ class SocialCard extends React.Component {
 class HeaderBrief extends React.Component {
   render() {
     return (
-      <>
+      <div className="header-brief">
         <SiteLogo image={this.props.siteLogo} />
-        <h2>{this.props.siteName}</h2>
-        <h3>
-          {this.props.siteTwitter} &#9679; {this.props.articleDate}
-        </h3>
-        <h4>{this.props.articleTitle}</h4>
-        <h4>&#123; author: {this.props.authorTwitter} &#125;</h4>
-      </>
+        <div className="main-content">
+          <p>
+            <SiteInfo
+              name={this.props.siteName}
+              twitter={this.props.siteTwitter}
+            />
+            <ArticleDate date={this.props.articleDate} />
+          </p>
+          <p>{this.props.articleTitle}</p>
+
+          <p>&#123; author: {this.props.authorTwitter} &#125;</p>
+        </div>
+      </div>
     );
   }
+}
+
+function SiteInfo(props) {
+  return (
+    <>
+      {props.name}
+      <span className="site-twitter"> {props.twitter}</span>
+    </>
+  );
+}
+
+function ArticleDate(props) {
+  return <span className="article-date">{props.date}</span>;
 }
 
 class ArticleDetails extends React.Component {
@@ -92,9 +122,9 @@ class IntroHeader extends React.Component {
 class SiteLogo extends React.Component {
   render() {
     return (
-      <>
+      <span className="site-logo">
         <img src={this.props.image} alt="Website Logo" />
-      </>
+      </span>
     );
   }
 }
@@ -125,13 +155,12 @@ class ArticleSummary extends React.Component {
 class SocialActions extends React.Component {
   render() {
     return (
-      <>
-        SocialActions
+      <div class="social-actions">
         <CommentsWidget />
-        <ShareWidget />
+        <RetweetWidget />
         <LikeWidget />
         <EmailWidget />
-      </>
+      </div>
     );
   }
 }
@@ -146,11 +175,11 @@ class CommentsWidget extends React.Component {
   }
 }
 
-class ShareWidget extends React.Component {
+class RetweetWidget extends React.Component {
   render() {
     return (
-      <div class="share-widget">
-        <img src="share-32.png" alt="Share" />
+      <div class="retweet-widget">
+        <FontAwesomeIcon icon="retweet" size="2x" />
       </div>
     );
   }
@@ -160,7 +189,7 @@ class LikeWidget extends React.Component {
   render() {
     return (
       <div class="like-widget">
-        <img src="like-empty-32.png" alt="Like" />
+        <FontAwesomeIcon icon="heart" size="2x" />
       </div>
     );
   }
@@ -170,7 +199,7 @@ class EmailWidget extends React.Component {
   render() {
     return (
       <div className="email-widget">
-        <img src="email-32.png" alt="Email Article" />
+        <FontAwesomeIcon icon="envelope" size="2x" />
       </div>
     );
   }
